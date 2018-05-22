@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[2]:
+# In[3]:
 
 
 import requests
@@ -89,9 +89,7 @@ def craete_xbrl_url_json(since,p):
         path = './download_info/dat_download_'+t_symbol+'.json'
         if os.path.exists(path) == True :
             page += 1
-        continue
-        
-        else:
+            continue
         
         #xmlをparseするElementTreeを取得
         ET_tree = ET.fromstring( response_string )
