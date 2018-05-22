@@ -86,7 +86,8 @@ def craete_xbrl_url_json(since,p):
         response_string = get_link_info_str(t_symbol, base_url)
         
 
-        path = './download_info/dat_download_'+t_symbol+'.json'
+        #すでに取得したファイルかどうかをチェックする
+        path = './downloaded_info/dat_download_'+t_symbol+'.json'
         if os.path.exists(path) == True :
             page += 1
             continue
