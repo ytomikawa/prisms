@@ -78,6 +78,13 @@ def craete_xbrl_url_json(since,p):
     count = 0
 
     while True:
+    
+        #すでに取得したファイルかどうかをチェックする
+        path = './downloaded_info/dat_download_'+t_symbol+'.json'
+        if os.path.exists(path) == True :
+            page += 1
+            continue
+
         #文字列変換
         t_symbol = str(page)
         print('page:'+t_symbol + ', loading...')
@@ -85,12 +92,6 @@ def craete_xbrl_url_json(since,p):
         #企業毎の有報へのデータへのリンク情報を取得
         response_string = get_link_info_str(t_symbol, base_url)
         
-
-        #すでに取得したファイルかどうかをチェックする
-        path = './downloaded_info/dat_download_'+t_symbol+'.json'
-        if os.path.exists(path) == True :
-            page += 1
-            continue
         
         #xmlをparseするElementTreeを取得
         ET_tree = ET.fromstring( response_string )
