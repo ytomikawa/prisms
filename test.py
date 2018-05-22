@@ -1,2 +1,2 @@
-print('hhhhhhhhhhhhhogehoge')
+print('hogehogeaaaaaaaa')
 print('aaaaaaaa')
