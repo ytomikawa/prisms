@@ -79,14 +79,15 @@ def craete_xbrl_url_json(since,p):
 
     while True:
     
+        #文字列変換
+        t_symbol = str(page)
+    
         #すでに取得したファイルかどうかをチェックする
         path = './downloaded_info/dat_download_'+t_symbol+'.json'
         if os.path.exists(path) == True :
             page += 1
             continue
 
-        #文字列変換
-        t_symbol = str(page)
         print('page:'+t_symbol + ', loading...')
 
         #企業毎の有報へのデータへのリンク情報を取得
