@@ -1,2 +1,1 @@
 print('hogehogeaaaaaaaa')
-print('aaaaaaaa')
