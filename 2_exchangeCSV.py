@@ -35,7 +35,7 @@ class XbrlParser(XBRLParser):
 
             row_dict = defaultdict(list)
             #default tag
-            row_dict['file_nm'] = self.xbrl_filepath.rsplit('\\' or '/', 1)[1]
+            row_dict['file_nm'] = self.xbrl_filepath.rsplit('/', 1)[1]
             row_dict['element_id'] = node.name
             row_dict['amount'] = node.string
 
