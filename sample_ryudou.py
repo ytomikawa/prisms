@@ -231,8 +231,8 @@ class XbrlParser(XBRLParser):
 
 def main(namespaces):
     base_path = os.getcwd()+'/xbrl_files/'
-    _dir = 'S100AFWB/XBRL/PublicDoc/'
-    xbrl_filename = base_path+_dir+'jpcrp030000-asr-001_E05651-000_2017-03-31_01_2017-06-23.xbrl'
+    _dir = 'E00118/ED2017062300647/S100AJ1V/XBRL/PublicDoc/'
+    xbrl_filename = base_path+_dir+'jpcrp030000-asr-001_E00118-000_2017-03-31_01_2017-06-23.xbrl'
 
     # get data
     xp = XbrlParser(xbrl_filename)
