@@ -1,5 +1,5 @@
-'''
-XBRL‚©‚ç—¬“®‘Y‚ğ’Šo‚·‚éƒTƒ“ƒvƒ‹ƒvƒƒOƒ‰ƒ€
+ï»¿'''
+XBRLã‹ã‚‰æµå‹•è³‡ç”£ã‚’æŠ½å‡ºã™ã‚‹ã‚µãƒ³ãƒ—ãƒ«ãƒ—ãƒ­ã‚°ãƒ©ãƒ 
 https://www.meganii.com/blog/2017/06/18/what-is-edinet-xbrl/
 '''
 
@@ -241,9 +241,9 @@ def main(namespaces):
     xbrl_persed = xp.parse_xbrl(namespaces)
     print('done')
 
-    df_xbrl_facts = xbrl_persed['facts'] # ‹àŠz‚Ì’è‹`‹y‚Ñ•¶‘î•ñ‚Ì’è‹`î•ñ
-    df_xbrl_labels = xbrl_persed['labels'] # –¼ÌƒŠƒ“ƒNî•ñ
-    df_xbrl_presentation = xbrl_persed['presentation'] # •\¦ƒŠƒ“ƒNî•ñ
+    df_xbrl_facts = xbrl_persed['facts'] # é‡‘é¡ã®å®šç¾©åŠã³æ–‡æ›¸æƒ…å ±ã®å®šç¾©æƒ…å ±
+    df_xbrl_labels = xbrl_persed['labels'] # åç§°ãƒªãƒ³ã‚¯æƒ…å ±
+    df_xbrl_presentation = xbrl_persed['presentation'] # è¡¨ç¤ºãƒªãƒ³ã‚¯æƒ…å ±
 
     # extract labels data
     df_xbrl_labels = xp.extract_target_data(df_xbrl_labels, lang='ja')
@@ -256,20 +256,20 @@ def main(namespaces):
     dat_fi = pd.merge(df_xbrl_labels, df_xbrl_facts, on='element_id', how='inner')
 
     # specify duration
-    dat_fi_cyi = dat_fi.ix[dat_fi.context_ref == 'CurrentYearInstant'] # “–Šú “_
-    # —¬“®‘Y‚Ìelement_id‚Ì‚İæ“¾
+    dat_fi_cyi = dat_fi.ix[dat_fi.context_ref == 'CurrentYearInstant'] # å½“æœŸ æ™‚ç‚¹
+    # æµå‹•è³‡ç”£ã®element_idã®ã¿å–å¾—
     parent = df_xbrl_labels.element_id.ix[df_xbrl_labels.label_string.str
-                                          .contains('^—¬“®‘Y$')].drop_duplicates()
-    print('\n', parent, '\n') # —¬“®‘Y‚Ìelement_id‚ğ•\¦
-    # B/S‚Ì—¬“®‘Y‚ÉŠÖ‚·‚éî•ñ‚Ì‚İæ“¾
+                                          .contains('^æµå‹•è³‡ç”£$')].drop_duplicates()
+    print('\n', parent, '\n') # æµå‹•è³‡ç”£ã®element_idã‚’è¡¨ç¤º
+    # B/Sã®æµå‹•è³‡ç”£ã«é–¢ã™ã‚‹æƒ…å ±ã®ã¿å–å¾—
     parent = 'jppfs_cor_currentassetsabstract'
     df_xbrl_ps_cbs = df_xbrl_presentation.ix[df_xbrl_presentation.role_id.str
                                              .contains('rol_ConsolidatedBalanceSheet'), :]
-    # Ä‹A“I‚É—¬“®‘Y‚Ìq—v‘fˆÈ‰º‚Ì—v‘f‚ğæ“¾
+    # å†å¸°çš„ã«æµå‹•è³‡ç”£ã®å­è¦ç´ ä»¥ä¸‹ã®è¦ç´ ã‚’å–å¾—
     df_descendant = xp.gather_descendant(df_xbrl_ps_cbs, parent).dropna() # delete nan
-    # “Á’è‚ÌŠ¨’è‰È–Ú‚Ìî•ñ‚Ì‚İæ“¾
+    # ç‰¹å®šã®å‹˜å®šç§‘ç›®ã®æƒ…å ±ã®ã¿å–å¾—
     df_fi_cyi_caa = xp.get_specific_account_name_info(dat_fi_cyi, df_descendant)
-    # ƒ‰ƒxƒ‹‚Æ‹àŠzî•ñ‚Ì‚İ•\¦
+    # ãƒ©ãƒ™ãƒ«ã¨é‡‘é¡æƒ…å ±ã®ã¿è¡¨ç¤º
     print(df_fi_cyi_caa[['label_string', 'amount']].drop_duplicates())
 
 if __name__ == '__main__':
