@@ -284,7 +284,7 @@ def main(namespaces):
     df_xbrl_ps_cbs = df_xbrl_presentation.ix[df_xbrl_presentation.role_id.str
                                              .contains('rol_ConsolidatedBalanceSheet'), :]
     # 特定の勘定科目の情報のみ取得
-    df_fi_cyi_caa = xp.get_specific_account_name_info(dat_fi_cyi, NetAssets)
+    df_fi_cyi_caa = xp.get_specific_account_name_info(dat_fi_cyi, 'NetAssets')
     # ラベルと金額情報のみ表示
     print(df_fi_cyi_caa[['label_string', 'amount']].drop_duplicates())
 
