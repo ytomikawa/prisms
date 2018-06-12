@@ -1,6 +1,8 @@
-﻿'''
+'''
 XBRLから流動資産を抽出するサンプルプログラム
 https://www.meganii.com/blog/2017/06/18/what-is-edinet-xbrl/
+
+・
 '''
 
 import os
@@ -259,6 +261,8 @@ def main(namespaces):
 
     # specify duration
     dat_fi_cyi = dat_fi.ix[dat_fi.context_ref == 'CurrentYearInstant'] # 当期 時点
+
+    '''
     # 流動資産のelement_idのみ取得
     parent = df_xbrl_labels.element_id.ix[df_xbrl_labels.label_string.str
                                           .contains('^流動資産$')].drop_duplicates()
@@ -273,6 +277,17 @@ def main(namespaces):
     df_fi_cyi_caa = xp.get_specific_account_name_info(dat_fi_cyi, df_descendant)
     # ラベルと金額情報のみ表示
     print(df_fi_cyi_caa[['label_string', 'amount']].drop_duplicates())
+    '''
+
+    # B/Sのみ取得
+    parent = 'jppfs_cor_currentassetsabstract'
+    df_xbrl_ps_cbs = df_xbrl_presentation.ix[df_xbrl_presentation.role_id.str
+                                             .contains('rol_ConsolidatedBalanceSheet'), :]
+    # 特定の勘定科目の情報のみ取得
+    df_fi_cyi_caa = xp.get_specific_account_name_info(dat_fi_cyi, NetAssets)
+    # ラベルと金額情報のみ表示
+    print(df_fi_cyi_caa[['label_string', 'amount']].drop_duplicates())
+
 
 if __name__ == '__main__':
     main({
