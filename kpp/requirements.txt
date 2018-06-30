@@ -1,0 +1,5 @@
+pymysql
+numpy
+pandas
+django
+django-bulk-update
